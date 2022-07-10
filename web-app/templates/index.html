@@ -1,0 +1,107 @@
+<!-- a template with a text input field, post request to /predict route-->
+<html>
+<head>
+    <title>Predict</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+        .flip-card {
+  background-color: transparent;
+  width: 50%;
+  perspective: 1000px;
+  height: 50%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+   </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>SDG Predictor</h1>
+                <!-- aim of website -->
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0"> This website is designed to predict the related Sustainable Development Goal of a text input.
+                        The text input is a paragraph of text. Our highly accurate ML/DL models will predict the SDG related to the your input.</p>
+                <footer class="blockquote-footer">Created by <cite title="Source Title">DINo-SDGs team</cite></footer>
+                </blockquote>
+
+                <form action="/predict" method="post">
+                    <div class="form-group">
+                        <label for="text">Text</label>
+                        <input type="text" class="form-control" id="text" name="text" placeholder="Enter text">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+                {% if label %}
+                    <div class="alert alert-success" role="alert">
+                        <p>Your input: {{sentence}}</p>
+                        <p>Predicted SDG: {{int_label}}</p>
+                    </div>
+                    <!-- flipping card -->
+                    <div class="flip-card" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-{{label}}-1024x1024.png" alt="sdg goal {{label}}" style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
+                            </div>
+                            <div class="flip-card-back" >
+                                <h2><a href="https://sdgs.un.org/goals/goal{{int_label}}" style="color: white">Goal {{int_label}}</a></h2>
+                                <h1> <a href="https://sdgs.un.org/goals/goal{{int_label}}" style="color: white"> {{sdg}}</a> </h1>
+                                <h3 style="">{{sdg_description}}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                {% else %}
+                    <!-- if no label is obtained, the user is informed -->
+                    <div class="alert alert-danger" role="alert">
+                        <p> There is an error related with our servers or with your input :(</p>
+                    </div>
+                {% endif %}
+
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

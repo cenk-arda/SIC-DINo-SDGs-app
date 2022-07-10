@@ -1,0 +1,4 @@
+$ python -m venv sic_venv
+$ virtualenv sic_venv
+
+pycharm -> add interpreter -> show all -> choose sic_venv as virtual env.
