@@ -1,16 +1,37 @@
 <!-- a template with a text input field, post request to /predict route-->
-<html>
+<!DOCTYPE html>
 <head>
     <title>Predict</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<style>
-        .flip-card {
+    <!--    jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+    <!-- import bootstrap 4.5 for spinners-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+            integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfCcgjoeQc0KXq5Z5K2pqkYrXeiwAF8MIQbL"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <style>
+body {
+    background: #e8cbc0;
+    background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
+    background: linear-gradient(to right, #e8cbc0, #636fa4);
+    min-height: 100vh;
+}
+.flip-card {
   background-color: transparent;
-  width: 50%;
+  width: 300px;
   perspective: 1000px;
-  height: 50%;
+  height: 300px;
+  display: block; margin-left: auto; margin-right: auto;
 }
 
 .flip-card-inner {
@@ -39,69 +60,206 @@
   background-color: #bbb;
   color: black;
 }
-
 .flip-card-back {
-  background-color: #2980b9;
+  background-color: #e8cbc0;
   color: white;
   transform: rotateY(180deg);
 }
-   </style>
+
+    </style>
 
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar fixed-top navbar-light justify-content-center " style="background-color: #e3f2fd;">
+                <div class="text-center">DINO-SDGs: Deriving Insights Into the Nature of Sustainable Development Goals
+                </div>
+            </nav>
+            <br> <br>
+            <div class="text-center">
                 <h1>SDG Predictor</h1>
-                <!-- aim of website -->
-                <blockquote class="blockquote text-center">
-                    <p class="mb-0"> This website is designed to predict the related Sustainable Development Goal of a text input.
-                        The text input is a paragraph of text. Our highly accurate ML/DL models will predict the SDG related to the your input.</p>
-                <footer class="blockquote-footer">Created by <cite title="Source Title">DINo-SDGs team</cite></footer>
-                </blockquote>
+            </div>
+            <!-- aim of website -->
+            <div class="card text-center">
+                <div class="card-header">
+                    About project
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote text-center">
+                        <p class="mb-0"> This website is designed to predict the related Sustainable Development Goal of
+                            a text input.
+                            The text input is a paragraph of text. Our highly accurate ML/DL models will predict the SDG
+                            related to the your input.</p>
+                        <footer class="blockquote-footer">Created by <cite title="Source Title">DINo-SDGs team</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="card-footer text-muted">
+                    July, 2022
+                </div>
+            </div>
+            <br> <br>
+            <form action="javascript:void(0);">
+                <div class="form-group">
+                    <label for="text">Text</label>
+                    <textarea type="text" class="form-control" id="text" name="text" placeholder="Enter text"
+                              rows="3"></textarea>
+                </div>
 
-                <form action="/predict" method="post">
-                    <div class="form-group">
-                        <label for="text">Text</label>
-                        <input type="text" class="form-control" id="text" name="text" placeholder="Enter text">
+                <!-- make a centered button  -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" id="submitbutton">Predict</button>
+                </div>
+            </form>
+
+
+            <!-- centered spinner -->
+            <div class="text-center" style="margin:10px">
+                <div class="spinner-border text-primary" style="display: none" role="status" id="loading_spinner">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!-- display the result -->
+            <div class="text-center" id="result-div" style="display: block">
+
+            </div>
+            <!-- End -->
+        </div>
+
+        <!-- contact -->
+        <div class="container py-5">
+            <div class="row text-center text-white">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-6">Contact</h1>
+                    <p class="lead mb-0">You can contact us via e-mail or our social media accounts.</p>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row text-center">
+
+                <!-- Team item -->
+                <div class="col-xl-6 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="https://scontent.fada3-1.fna.fbcdn.net/v/t1.6435-9/203012363_4041854662564849_7187906721060477628_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=eMPo0V-PTIkAX9twrpT&_nc_ht=scontent.fada3-1.fna&oh=00_AT_p0G6tGUgomu9oR3L9R1IoeAD4iiFAZVWTSktyOja82A&oe=62F6E0DF"
+                            alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Beyza Taşdemir</h5><span
+                                class="small text-uppercase text-muted">Developer</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                    class="fa fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                    class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+                </div><!-- End -->
 
-                {% if label %}
-                    <div class="alert alert-success" role="alert">
-                        <p>Your input: {{sentence}}</p>
-                        <p>Predicted SDG: {{int_label}}</p>
+                <!-- Team item -->
+                <div class="col-xl-6 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                            src="https://avatars.githubusercontent.com/u/53655921?v=4" alt="" width="100"
+                            class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Cenk Arda Yılmaz</h5><span
+                                class="small text-uppercase text-muted">Developer</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                    class="fa fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i
+                                    class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- flipping card -->
-                    <div class="flip-card" style = "display: block; margin-left: auto; margin-right: auto; width: 50%;">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-{{label}}-1024x1024.png" alt="sdg goal {{label}}" style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
-                            </div>
-                            <div class="flip-card-back" >
-                                <h2><a href="https://sdgs.un.org/goals/goal{{int_label}}" style="color: white">Goal {{int_label}}</a></h2>
-                                <h1> <a href="https://sdgs.un.org/goals/goal{{int_label}}" style="color: white"> {{sdg}}</a> </h1>
-                                <h3 style="">{{sdg_description}}</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                {% else %}
-                    <!-- if no label is obtained, the user is informed -->
-                    <div class="alert alert-danger" role="alert">
-                        <p> There is an error related with our servers or with your input :(</p>
-                    </div>
-                {% endif %}
-
-
+                </div>
+                <!-- End -->
             </div>
         </div>
     </div>
-
+</div>
 
 </body>
 
+
+<script>
+// make an ajax request to /predict route when submit button is clicked
+$(document).ready(function() {
+    $('#submitbutton').click(function() {
+        // show the spinner
+        $('#loading_spinner').show();
+        // disable the submit button
+        $('#submitbutton').prop('disabled', true);
+        $.ajax({
+            type: 'POST',
+            url: '/predict',
+            data: {
+                'text': $('#text').val()
+            },
+            success: function(data) {
+                console.log(data);
+                // hide the spinner
+                $('#loading_spinner').hide();
+                // enable the submit button
+                $('#submitbutton').prop('disabled', false);
+                // if label is not null, dynamically add to  end of the div col-md-12
+                if (data.sdg != null) {
+                    var sdg_string = data.sdg.toString();
+                    if (data.sdg < 10) {
+                        sdg_string = "0" + sdg_string;
+                    }
+
+                    $('#result-div').html(
+                        '<div class="alert alert-success" role="alert">' +
+                        '<p>Your input: ' + data.sentence + '</p>' +
+                        '<p>Predicted SDG: ' + data.sdg + '</p>' +
+                        '</div>' +
+                        '<div class="flip-card">' +
+                        '<div class="flip-card-inner">' +
+                        '<div class="flip-card-front">' +
+                        '<img src="https://www.un.org/sustainabledevelopment/wp-content/uploads/2019/08/E-Goal-' + sdg_string + '-1024x1024.png" alt="sdg goal ' + data.sdg + '" style="display: block; margin-left: auto; margin-right: auto; width: 100%;">' +
+                        '</div>' +
+                        '<div class="flip-card-back">' +
+                        '<h2><a href="https://sdgs.un.org/goals/goal' + data.sdg + '" style="color: white">Goal ' + data.sdg + '</a></h2>' +
+                        '<a href="https://sdgs.un.org/goals/goal' + data.sdg + '" style="color: white"> ' +  '<span class="large text-uppercase text-muted font-weight-bold">' + data.sdg_name + '</span>' + '</a>' + '<br>' + '<br>' +
+                        '<p class="text-monospace">' + data.sdg_description + '<p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    );
+
+                } else if(data.error != null) {
+
+                    // if input is erronous, give feedback to the user
+                    $('#result-div').html(
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<p>' + data.error + '</p>' +
+                        '</div>'
+                    );
+                }
+                else {
+                    // if another error occurs, give feedback to the user
+                    $('#result-div').html(
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<p>' + "There is an error related with our servers right now. Try again later or contact us." + '</p>' +
+                        '</div>'
+                    );
+                }
+            }
+        });
+    });
+});
+
+</script>
 </html>

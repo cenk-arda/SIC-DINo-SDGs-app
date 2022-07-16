@@ -36,8 +36,24 @@ def predict_text(text, model):
     tokens_tensor = tokens_tensor.to(device)
     with torch.no_grad():
         outputs = model(tokens_tensor)
-        print(outputs)
-        predictions = outputs[0]
-    _, predicted = torch.max(predictions, dim=1)
-    print(predicted)
-    return predicted.item()
+        predictions = outputs[0]  # logits
+
+    """ logits (https://developers.google.com/machine-learning/glossary/#logits)
+    The vector of raw (non-normalized) predictions that a classification model
+     generates, which is ordinarily then passed to a normalization function. 
+     If the model is solving a multi-class classification problem, logits 
+     typically become an input to the softmax function. The softmax function 
+     then generates a vector of (normalized) probabilities with one value for each possible class."""
+    """use softmax to get the probability of each label"""
+
+    probabilities = torch.nn.functional.softmax(predictions, dim=1)
+    print(probabilities.tolist())
+    """get the index of the label with the highest probability"""
+    predicted_index = torch.argmax(probabilities, dim=1)
+    """ if it's probability is less than 0.65, return none"""
+    if probabilities[0][predicted_index[0]] < 0.65:
+        print(probabilities[0][predicted_index[0]])
+        return probabilities, None
+
+    predicted_label = predicted_index.item()
+    return probabilities, predicted_label
