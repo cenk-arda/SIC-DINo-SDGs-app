@@ -6,7 +6,6 @@ import tqdm
 from torch.utils.data import TensorDataset
 
 
-
 def load_model():
     device = torch.device('cpu')  # if using gpu, change this line accordingly.
     model = BertForSequenceClassification.from_pretrained("bert-base-uncased",

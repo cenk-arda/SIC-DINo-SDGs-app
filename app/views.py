@@ -1,8 +1,10 @@
-import os
-from flask import Flask, current_app, render_template, request, jsonify
-from load_evaluate_model import predict_text, load_model
+from flask import current_app, render_template, request, jsonify
+from app.load_evaluate_model import predict_text, load_model
+from flask import Flask, current_app
 
 app = Flask(__name__)
+with app.app_context():
+    current_app.model = load_model()
 
 
 @app.route("/")
@@ -73,8 +75,6 @@ def predict():
             return jsonify({"error": str(e)})
 
 
-if __name__ == '__main__':
-    with app.app_context():
-        current_app.model = load_model()
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+if __name__ == "__main__":
+    # in development env (without gunicorn); change app.load_evaluate_model to load_evaluate_model while importing.
+    app.run(debug=True)
