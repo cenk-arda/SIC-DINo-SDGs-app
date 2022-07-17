@@ -2,3 +2,5 @@ $ python -m venv sic_venv
 $ virtualenv sic_venv
 
 pycharm -> add interpreter -> show all -> choose sic_venv as virtual env.
+
+docker run -p 8000:8000 dino-sgs-app-gunicorn-img
