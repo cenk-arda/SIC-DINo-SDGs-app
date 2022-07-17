@@ -2,15 +2,9 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import pandas as pd
 import numpy as np
 import torch
-from tqdm.notebook import tqdm
+import tqdm
 from torch.utils.data import TensorDataset
-from sklearn.model_selection import train_test_split  # star
-from sklearn.metrics import classification_report  # star
-from sklearn.model_selection import train_test_split
-from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
-from transformers import AdamW, get_linear_schedule_with_warmup
-from sklearn.metrics import f1_score
-import random
+
 
 
 def load_model():
@@ -21,7 +15,7 @@ def load_model():
                                                           output_hidden_states=False,
                                                           )
     model.to(device)
-    model.load_state_dict(torch.load('../data/finetuned_BERT_v2_epoch_5.model', map_location=torch.device('cpu')),
+    model.load_state_dict(torch.load('data/finetuned_BERT_v2_epoch_5.model', map_location=torch.device('cpu')),
                           strict=False)
     return model
 
