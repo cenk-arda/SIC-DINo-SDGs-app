@@ -11,4 +11,4 @@ For all goals: https://sdgs.un.org/
 
 
 ### version 1.0:
-Predictor model: [*bert-base-uncased*](https://huggingface.co/bert-base-uncased). fine-tuned with OSDG-CD.
+Predictor model: [*bert-base-uncased*](https://huggingface.co/bert-base-uncased). fine-tuned with [OSDG-CD](https://zenodo.org/record/6393942#.YstnkxzP3Jw) (1 April 2022 version).
