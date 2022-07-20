@@ -23,12 +23,11 @@ def load_model():
 def predict_text(text, model):
     device = torch.device('cpu')  # if using gpu, change this line accordingly.
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
-    tokenized_text = tokenizer.tokenize(text)
-    indexed_tokens = tokenizer.convert_tokens_to_ids(tokenized_text)
-    tokens_tensor = torch.tensor([indexed_tokens])
-    tokens_tensor = tokens_tensor.to(device)
+    encoded_input = tokenizer(text, return_tensors='pt')
+    encoded_input = encoded_input.to(device)
+    model.eval()
     with torch.no_grad():
-        outputs = model(tokens_tensor)
+        outputs = model(**encoded_input)
         predictions = outputs[0]  # logits
 
     """ logits (https://developers.google.com/machine-learning/glossary/#logits)
@@ -40,12 +39,12 @@ def predict_text(text, model):
     """use softmax to get the probability of each label"""
 
     probabilities = torch.nn.functional.softmax(predictions, dim=1)
-    print(probabilities.tolist())
+    # print(probabilities.tolist())
     """get the index of the label with the highest probability"""
     predicted_index = torch.argmax(probabilities, dim=1)
-    """ if it's probability is less than 0.65, return none"""
-    if probabilities[0][predicted_index[0]] < 0.65:
-        print(probabilities[0][predicted_index[0]])
+    """ if it's probability is less than 70%, return none"""
+    if probabilities[0][predicted_index[0]] < 0.70:
+        # print(probabilities[0][predicted_index[0]])
         return probabilities, None
 
     predicted_label = predicted_index.item()
