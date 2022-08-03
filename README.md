@@ -1,8 +1,14 @@
 # SIC-DINo-SDGs-app
+
+
 This is the web application of our project within Samsung Innovation Campus.
 
 The project's main focus is to build ML and DL models to classify OSDG Community Dataset.<br>
 For the dataset: https://zenodo.org/record/6393942#.YstnkxzP3Jw
+
+The project is currently hosted on Google Cloud Run:
+
+https://sic-dino-sdgs-app-gmjtla5sga-lz.a.run.app/
 
 This web application is designed to predict the related Sustainable Development Goal of a text input.
 The text input is a paragraph of text. Our highly accurate ML/DL models will predict the SDG related to the your input.<br>
