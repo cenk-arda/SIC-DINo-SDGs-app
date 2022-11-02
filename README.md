@@ -1,5 +1,7 @@
 # SIC-DINo-SDGs-app
 
+An NLP tool that predicts the Sustainable Development Goal related to text inputs.
+
 
 This is the web application of our project within Samsung Innovation Campus.
 
@@ -8,7 +10,7 @@ For the dataset: https://zenodo.org/record/6393942#.YstnkxzP3Jw
 
 The project is currently hosted on Google Cloud Run:
 
-https://sic-dino-sdgs-app-gmjtla5sga-lz.a.run.app/
+https://sic-dino-sdgs-app-gmjtla5sga-lz.a.run.app/ (out of free trial of GCP)
 
 This web application is designed to predict the related Sustainable Development Goal of a text input.
 The text input is a paragraph of text. Our highly accurate ML/DL models will predict the SDG related to the your input.<br>
